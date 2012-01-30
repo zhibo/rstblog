@@ -3,13 +3,14 @@
 {% block body %}
 
   {%- for entry in pagination.get_slice() %}
-  <div class=entry-overview>
-    <div class=date>{{ format_date(entry.pub_date, format='medium') }}</div>
-    <div class=detail>
+  <div class="overview">
+    <div class="overview-date">{{ format_date(entry.pub_date, format='medium') }}</div>
+    <div class="overview-description">
       <h1><a href="{{ link_to('page', slug=entry.slug) }}">{{ entry.title }}</a></h1>
       {% if entry.summary %}
       <div class=summary>{{ entry.render_summary() }}</div>
       {% endif %}
+      <hr/>
     </div>
   </div>
   {%- endfor %}  

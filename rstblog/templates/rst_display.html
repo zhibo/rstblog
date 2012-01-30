@@ -1,21 +1,32 @@
 {% extends "layout.html" %}
 {% block title %}{{ rst.title }}{% endblock %}
 {% block body %}
+  <section id="content" class="body">
+      <article class="entry">
   {%- if not config.hide_title %}
-  {{ rst.html_title }}
+  <h1 class="entry-title">{{ rst.html_title }}</h1>
   {%- endif %}
   {% if ctx.pub_date %}
-  <p class=date>written on {{ format_date(ctx.pub_date, format='full') }}
+  <p class="entry-date">written on {{ format_date(ctx.pub_date, format='full') }}</p>
   {% endif %}
 
+  <div class="entry-content">
   {{ rst.fragment }}
+  </div>
 
+  <div class="entry-bottomline">
+      <hr/>
+      <p class="entry-bottomline-social">
+          <a class="refenence external" href="" >permalink</a>
+      </p>
   {% if ctx.tags %}
-  <p class=tags>This entry was tagged
+  <p class="entry-bottomline-tags">This entry was tagged
     {% for tag in ctx.tags|sort(case_sensitive=true) %}
       {%- if not loop.first and not loop.last %}, {% endif -%}
       {%- if loop.last and not loop.first %} and {% endif %}
       <a href="{{ link_to('tag', tag=tag) }}">{{ tag }}</a>
     {%- endfor %}
   {% endif %}
+  </div> 
+  </section>
 {% endblock %}
